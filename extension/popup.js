@@ -37,7 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // Test button
-    document.getElementById('test-btn').addEventListener('click', () => {
+    document.getElementById('test-btn').addEventListener('click', async () => {
+        // Request optional permissions first
+        const granted = await requestOptionalPerms(["downloads","scripting"]);
+        if (!granted) {
+            console.warn("[Investors][Estates] optional permissions not granted; running in reduced mode.");
+            // Continue anyway for test mode
+        }
+        
         const log = document.getElementById('log');
         log.style.display = 'block';
         log.textContent = 'Running test mode...\n';
