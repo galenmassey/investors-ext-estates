@@ -1,5 +1,24 @@
+// === Investors page lock (Estates) ===
+(() => {
+  const MODE = "Estates";
+  const LOCK_KEY = "__INVESTORS_ACTIVE_MODE__";
+  const active = globalThis[LOCK_KEY];
+  if (active && active !== MODE) {
+    console.debug(`[Investors][${MODE}] Another mode active: ${active}. Skipping.`);
+    return;
+  }
+  globalThis[LOCK_KEY] = MODE;
+  addEventListener("beforeunload", () => {
+    if (globalThis[LOCK_KEY] === MODE) delete globalThis[LOCK_KEY];
+  });
+})();
+
 // Content script for NC Estates Auto-Processor V3.0 - Enhanced with All Fixes
 console.log('Estates Auto-Processor V3.0 Enhanced - Loaded with All Fixes');
+
+// Namespaced message constants
+const MSG_SCAN = "estate:scan";
+const MSG_RESULT = "estate:result";
 
 // ========== CONFIGURATION ==========
 const MIN_ESTATE_AGE_YEARS = 2;
