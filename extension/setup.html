@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estate Processor Setup</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #6B46C1;
+            border-bottom: 3px solid #6B46C1;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #7C3AED;
+            margin-top: 30px;
+        }
+        .step {
+            background: #F9FAFB;
+            border-left: 4px solid #6B46C1;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .step h3 {
+            margin-top: 0;
+            color: #4C1D95;
+        }
+        code {
+            background: #1F2937;
+            color: #10B981;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', monospace;
+        }
+        .code-block {
+            background: #1F2937;
+            color: #10B981;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .success {
+            color: #10B981;
+        }
+        .warning {
+            color: #F59E0B;
+        }
+        .error {
+            color: #EF4444;
+        }
+        button {
+            background: linear-gradient(135deg, #6B46C1 0%, #9333EA 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(107, 70, 193, 0.3);
+        }
+        .status-box {
+            background: #F3F4F6;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        .checkbox {
+            margin-right: 10px;
+        }
+        ul {
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏛️ NC Estates Auto-Processor V3.0 Setup</h1>
+        
+        <div class="status-box">
+            <h3>System Status</h3>
+            <div>Extension ID: <code id="extension-id">Loading...</code></div>
+            <div>Native Helper: <span id="native-status" class="warning">Not checked</span></div>
+            <div>Test Mode: <span id="test-status">Ready</span></div>
+        </div>
+
+        <h2>📋 Quick Setup Checklist</h2>
+        
+        <div class="step">
+            <h3>Step 1: Install Node.js</h3>
+            <input type="checkbox" class="checkbox" id="node-check">
+            <label for="node-check">Node.js installed (download from nodejs.org if needed)</label>
+            <div class="code-block">
+                node --version<br>
+                # Should show v14.0.0 or higher
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Setup Native Helper</h3>
+            <input type="checkbox" class="checkbox" id="helper-check">
+            <label for="helper-check">Navigate to Native Helper directory and install dependencies</label>
+            <div class="code-block">
+                cd "C:\Users\charl\OneDrive\Desktop\Temp Investors Ext Testing\Estate Extensions\Native Helper"<br>
+                npm install axios
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 3: Update Batch File</h3>
+            <input type="checkbox" class="checkbox" id="batch-check">
+            <label for="batch-check">Update estate-helper.bat to use the enhanced version</label>
+            <div class="code-block">
+                @echo off<br>
+                cd /d "C:\Users\charl\OneDrive\Desktop\Temp Investors Ext Testing\Estate Extensions\Native Helper"<br>
+                node estate-helper-enhanced.js
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 4: Register Native Host</h3>
+            <input type="checkbox" class="checkbox" id="registry-check">
+            <label for="registry-check">Run install.js with your extension ID (shown above)</label>
+            <div class="code-block">
+                # Run as Administrator<br>
+                node install.js<br>
+                # Paste extension ID when prompted
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 5: Test Connection</h3>
+            <button id="test-native">Test Native Connection</button>
+            <button id="test-save">Test Save Function</button>
+            <div id="test-results"></div>
+        </div>
+
+        <h2>🎯 Features</h2>
+        <ul>
+            <li><strong>Correct Selectors:</strong> Matches NC Court Portal structure from your screenshots</li>
+            <li><strong>Test Mode:</strong> Creates sample case folder without navigating portal</li>
+            <li><strong>Enhanced Logging:</strong> Detailed logs saved to estate_helper.log</li>
+            <li><strong>Auto-Processing:</strong> Processes all qualified cases automatically</li>
+            <li><strong>Respect for Families:</strong> Only processes estates 2+ years old and disposed</li>
+        </ul>
+
+        <h2>📁 Output Structure</h2>
+        <div class="code-block">
+Estate File Downloads\<br>
+└── [Case Number]\<br>
+    ├── case_details.json<br>
+    ├── full_page_text.txt<br>
+    ├── processing_summary.txt<br>
+    ├── parties\<br>
+    │   ├── all_parties.json<br>
+    │   ├── decedent.txt<br>
+    │   ├── executor.txt<br>
+    │   └── beneficiaries.txt<br>
+    └── documents\<br>
+        ├── 001_Application_for_Probate.pdf<br>
+        ├── 002_Inventory.pdf<br>
+        └── 003_Final_Accounting.pdf
+        </div>
+
+        <h2>🐛 Troubleshooting</h2>
+        <div class="step">
+            <h3>Native Helper Not Connecting?</h3>
+            <ol>
+                <li>Check estate_helper.log in the download folder</li>
+                <li>Verify registry entry: <code>reg query "HKCU\Software\Google\Chrome\NativeMessagingHosts\com.investors.estate_helper"</code></li>
+                <li>Ensure extension ID matches in manifest</li>
+                <li>Restart Chrome completely</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h3>PDFs Not Downloading?</h3>
+            <p>The portal may require authentication for PDFs. Check the documents folder for _metadata.txt files with URLs for manual download.</p>
+        </div>
+
+        <h2>✅ Ready to Use</h2>
+        <p>Once setup is complete:</p>
+        <ol>
+            <li>Navigate to estate search results on NC Court Portal</li>
+            <li>Click "🔍 Scan Results" to find qualified cases</li>
+            <li>Click "🧪 Test Mode" to verify file saving works</li>
+            <li>Click "🤖 Auto-Process All" to process all qualified cases</li>
+        </ol>
+    </div>
+
+    <script src="setup.js"></script>
+</body>
+</html>

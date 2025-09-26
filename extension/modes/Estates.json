@@ -1,0 +1,33 @@
+{
+  "name": "Estates",
+  "description": "Probate and Estate Cases",
+  "caseTypes": ["E", "EST", "SP"],
+  "filters": {
+    "includePatterns": [
+      "estate",
+      "probate",
+      "decedent",
+      "executor",
+      "administrator",
+      "inventory",
+      "real property",
+      "sale of property",
+      "petition to sell"
+    ],
+    "excludePatterns": []
+  },
+  "selectors": {
+    "caseNumber": "[id*='CaseNumber'], .case-number",
+    "decedent": "[id*='Decedent'], .decedent-name",
+    "executor": "[id*='Executor'], [id*='Administrator'], .executor-name",
+    "filingDate": "[id*='FilingDate'], .filing-date"
+  },
+  "pdfPatterns": [
+    "Inventory",
+    "Petition",
+    "Order",
+    "Notice",
+    "Report",
+    "Final Account"
+  ]
+}

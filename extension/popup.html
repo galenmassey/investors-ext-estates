@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            width: 350px;
+            padding: 15px;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        h2 {
+            color: #6B46C1;
+            margin-top: 0;
+            font-size: 18px;
+            border-bottom: 2px solid #6B46C1;
+            padding-bottom: 8px;
+        }
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .status-label {
+            font-weight: 600;
+            color: #4B5563;
+        }
+        .status-value {
+            color: #6B46C1;
+        }
+        .connected {
+            color: #10B981;
+        }
+        .disconnected {
+            color: #EF4444;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background: linear-gradient(135deg, #6B46C1 0%, #9333EA 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .log {
+            background: #1F2937;
+            color: #10B981;
+            padding: 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 11px;
+            margin-top: 10px;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🏛️ Estates Processor V3</h2>
+        
+        <div class="status-item">
+            <span class="status-label">Native Helper:</span>
+            <span id="native-status" class="status-value disconnected">Not configured</span>
+        </div>
+        
+        <div class="status-item">
+            <span class="status-label">Extension ID:</span>
+            <span id="ext-id" class="status-value" style="font-size: 10px;">...</span>
+        </div>
+        
+        <div class="status-item">
+            <span class="status-label">Cases Processed:</span>
+            <span id="case-count" class="status-value">0</span>
+        </div>
+        
+        <button id="test-btn">Run Test Mode</button>
+        <button id="setup-btn">Open Setup Guide</button>
+        <button id="clear-btn">Clear Storage</button>
+        
+        <div id="log" class="log" style="display:none;"></div>
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{
+    "manifest_version": 3,
+    "name": "Investors Estates Extension",
+    "version": "3.0.0",
+    "description": "Processes disposed estate cases with enhanced extraction and logging",
+    
+    "permissions": [
+        "activeTab",
+        "storage",
+        "tabs",
+        "scripting",
+        "downloads"
+    ],
+    
+    "host_permissions": [
+        "*://portal-nc.tylertech.cloud/*",
+        "*://*.tylertech.cloud/*"
+    ],
+    
+    "content_scripts": [
+        {
+            "matches": [
+                "*://portal-nc.tylertech.cloud/*",
+                "*://*.tylertech.cloud/*"
+            ],
+            "js": ["content.js"],
+            "run_at": "document_idle"
+        }
+    ],
+    
+    "background": {
+        "service_worker": "background.js"
+    },
+    
+    "action": {
+        "default_title": "Investors Estates Extension",
+        "default_popup": "popup.html"
+    }
+}

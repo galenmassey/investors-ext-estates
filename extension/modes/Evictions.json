@@ -1,0 +1,38 @@
+{
+  "name": "Evictions",
+  "description": "Summary Ejectment Cases",
+  "caseTypes": ["CVD", "CVM", "CV"],
+  "filters": {
+    "includePatterns": [
+      "summary ejectment",
+      "eviction",
+      "landlord",
+      "tenant"
+    ],
+    "excludePatterns": [
+      "LLC",
+      "L.L.C.",
+      "Inc",
+      "Corporation",
+      "Company",
+      "Management",
+      "Properties",
+      "Realty",
+      "Unit",
+      "Apt",
+      "#"
+    ]
+  },
+  "selectors": {
+    "caseNumber": "[id*='CaseNumber'], .case-number",
+    "parties": "[id*='Party'], .party-name",
+    "address": "[id*='Address'], .address",
+    "filingDate": "[id*='FilingDate'], .filing-date"
+  },
+  "pdfPatterns": [
+    "Complaint",
+    "Summons",
+    "Judgment",
+    "Magistrate"
+  ]
+}

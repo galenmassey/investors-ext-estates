@@ -1,0 +1,39 @@
+{
+    "manifest_version": 3,
+    "name": "NC Estates Auto-Processor V3.0 Enhanced",
+    "version": "3.0.1",
+    "description": "Processes disposed estate cases with native file saving, test mode, and enhanced logging",
+    
+    "permissions": [
+        "activeTab",
+        "storage",
+        "tabs",
+        "nativeMessaging",
+        "scripting"
+    ],
+    
+    "host_permissions": [
+        "*://portal-nc.tylertech.cloud/*",
+        "*://*.tylertech.cloud/*"
+    ],
+    
+    "content_scripts": [
+        {
+            "matches": [
+                "*://portal-nc.tylertech.cloud/*",
+                "*://*.tylertech.cloud/*"
+            ],
+            "js": ["content-enhanced.js"],
+            "run_at": "document_idle"
+        }
+    ],
+    
+    "background": {
+        "service_worker": "background-enhanced.js"
+    },
+    
+    "action": {
+        "default_title": "NC Estates Auto-Processor",
+        "default_popup": "popup.html"
+    }
+}

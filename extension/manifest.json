@@ -1,0 +1,54 @@
+{
+    "manifest_version": 3,
+    "name": "NC Estates Auto-Processor V3.0 Enhanced",
+    "version": "3.3.0",
+    "description": "Processes disposed estate cases with native file saving, test mode, and enhanced logging",
+    
+    "permissions": [
+        "activeTab",
+        "storage",
+        "tabs",
+        "nativeMessaging",
+        "scripting",
+        "downloads"
+    ],
+    
+    "host_permissions": [
+        "*://portal-nc.tylertech.cloud/*",
+        "*://*.tylertech.cloud/*"
+    ],
+    
+    "content_scripts": [
+        {
+            "matches": [
+                "*://portal-nc.tylertech.cloud/*",
+                "*://*.tylertech.cloud/*"
+            ],
+            "js": ["content.js"],
+            "run_at": "document_idle"
+        }
+    ],
+    
+    "background": {
+        "service_worker": "background.js"
+    },
+    
+    "action": {
+        "default_title": "NC Estates Auto-Processor",
+        "default_popup": "popup.html"
+    },
+    
+    "web_accessible_resources": [{
+        "resources": ["nc-ecourts-extractor.js", "scanner-simple.js", "tab-manager.js"],
+        "matches": ["*://portal-nc.tylertech.cloud/*", "*://*.tylertech.cloud/*"]
+    }],
+    
+    "commands": {
+        "toggle-panel": {
+            "suggested_key": {
+                "default": "Alt+E"
+            },
+            "description": "Toggle the processor panel"
+        }
+    }
+}
