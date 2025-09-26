@@ -162,3 +162,30 @@ chrome.runtime.onInstalled.addListener(() => {
 
 // Try to connect immediately
 connectNativeHost();
+
+// === [INVESTORS guard] prevent duplicate listener registration ===
+(() => {
+  const G = globalThis;
+  G.__INV_LISTENERS__ = G.__INV_LISTENERS__ || {};
+
+  if (!G.__INV_LISTENERS__.onMessage) {
+    const safeHandler = (msg, sender, sendResponse) => {
+      try {
+        const done = (payload) => {
+          try { sendResponse(payload); } catch (e) {}
+        };
+        // Keep/port your actual message handling into here later if needed.
+        done({ ok: true, echo: !!msg });
+      } catch (e) {
+        try { sendResponse({ ok: false, error: e?.message || String(e) }); } catch {}
+      }
+      return false;
+    };
+
+    if (!chrome.runtime.onMessage.hasListeners?.()) {
+      chrome.runtime.onMessage.addListener(safeHandler);
+    }
+    G.__INV_LISTENERS__.onMessage = true;
+    console.log("[Investors][Estates] background onMessage listener set");
+  }
+})();
