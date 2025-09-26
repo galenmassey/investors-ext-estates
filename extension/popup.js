@@ -1,4 +1,15 @@
 // Popup JavaScript for Estates Extension
+
+async function requestOptionalPerms(perms = []) {
+  return new Promise((resolve) => {
+    chrome.permissions.request({ permissions: perms }, (granted) => {
+      const err = chrome.runtime.lastError?.message;
+      if (err) console.warn('[Investors][Estates] permissions.request error:', err);
+      resolve(!!granted);
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // Show extension ID
     document.getElementById('ext-id').textContent = chrome.runtime.id;
@@ -61,4 +72,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
+});
+
+// Open the extension Options page
+document.getElementById('btn-open-options')?.addEventListener('click', () => {
+  if (chrome.runtime.openOptionsPage) {
+    chrome.runtime.openOptionsPage();
+  } else {
+    window.open(chrome.runtime.getURL('options.html'));
+  }
 });
