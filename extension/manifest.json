@@ -16,10 +16,8 @@
         "nativeMessaging"
     ],
     
-    "host_permissions": [
-        "*://portal-nc.tylertech.cloud/*",
-        "*://*.tylertech.cloud/*"
-    ],
+    "host_permissions": ["https://portal-nc.tylertech.cloud/*"],
+    "optional_host_permissions": ["https://*.tylertech.cloud/*"],
     
     "content_scripts": [
         {
