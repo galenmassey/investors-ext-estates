@@ -21,7 +21,7 @@ const MSG_SCAN = "estate:scan";
 const MSG_RESULT = "estate:result";
 
 // Null-safe DOM helpers (use as you edit; no global rewrites)
-const $ = (sel, root=document) => root.querySelector(sel);
+const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel) || []);
 const $ = (sel, root=document) => Array.from(root.querySelectorAll(sel) || []);
 const text = (el) => (el && ('textContent' in el)) ? el.textContent.trim() : '';
 const href = (el) => (el && el.getAttribute) ? el.getAttribute('href') : '';
