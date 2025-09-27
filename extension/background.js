@@ -7,6 +7,23 @@ let nativePort = null;
 let messageQueue = [];
 let isPortConnected = false;
 
+// Safe wrappers for Chrome APIs (micro-pass additions)
+async function safeDownload(opts) {
+  const p = new Promise((resolve, reject) => {
+    try { chrome.downloads.download(opts, (id) => {
+      const err = chrome.runtime.lastError; if (err) reject(err); else resolve(id);
+    }); } catch (e) { reject(e); }
+  });
+  
+  try {
+    const id = await p;
+    return id;
+  } catch (err) {
+    console.warn('[Investors][Estates] downloads.download failed:', err, opts?.url);
+    return null;
+  }
+}
+
 // Connect to native helper
 function connectNativeHost() {
     console.log('Attempting to connect to native helper...');
@@ -189,3 +206,6 @@ connectNativeHost();
     console.log("[Investors][Estates] background onMessage listener set");
   }
 })();
+
+// Export for use in other modules if needed
+export { safeDownload };
