@@ -20,6 +20,12 @@ console.log('Estates Auto-Processor V3.0 Enhanced - Loaded with All Fixes');
 const MSG_SCAN = "estate:scan";
 const MSG_RESULT = "estate:result";
 
+// Null-safe DOM helpers (use as you edit; no global rewrites)
+const $ = (sel, root=document) => root.querySelector(sel);
+const $ = (sel, root=document) => Array.from(root.querySelectorAll(sel) || []);
+const text = (el) => (el && ('textContent' in el)) ? el.textContent.trim() : '';
+const href = (el) => (el && el.getAttribute) ? el.getAttribute('href') : '';
+
 // ========== CONFIGURATION ==========
 const MIN_ESTATE_AGE_YEARS = 2;
 const DEBUG_MODE = true;
