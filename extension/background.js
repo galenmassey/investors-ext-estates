@@ -189,3 +189,16 @@ connectNativeHost();
     console.log("[Investors][Estates] background onMessage listener set");
   }
 })();
+
+import { withLastError } from './lib/guards.js';
+
+export async function safeDownload(opts) {
+  const p = new Promise((resolve, reject) => {
+    try { chrome.downloads.download(opts, (id) => {
+      const err = chrome.runtime.lastError; if (err) reject(err); else resolve(id);
+    }); } catch (e) { reject(e); }
+  });
+  const res = await withLastError(p);
+  if (!res.ok) console.warn('[Investors][Estates] downloads.download failed:', res.error, opts?.url);
+  return res.ok ? res.res : null;
+}
